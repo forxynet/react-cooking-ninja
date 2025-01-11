@@ -1,2 +1,3 @@
-# react-cooking-ninja
-react
+
+
+json-server --watch ./data/db.json
