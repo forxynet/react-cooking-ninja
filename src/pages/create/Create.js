@@ -5,6 +5,7 @@ import { useFetch } from '../../hooks/useFetch'
 
 // styles
 import './Create.css'
+import { useTheme } from '../../hooks/useTheme';
 
 export default function Create() {
   const [title, setTitle] = useState('')
@@ -13,6 +14,7 @@ export default function Create() {
   const [newIngredient, setNewIngredient] = useState('')
   const [ingredients, setIngredients] = useState([])
   const ingredientInput = useRef(null)
+  const { mode } = useTheme()
 
   const { postData, data } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
 
@@ -42,7 +44,7 @@ export default function Create() {
   }, [data, navigate]);
 
   return (
-    <div className="create">
+    <div className={`create ${mode}`}>
       <h2 className="page-title">Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
 
