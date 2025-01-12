@@ -14,7 +14,7 @@ export default function Create() {
   const [ingredients, setIngredients] = useState([])
   const ingredientInput = useRef(null)
 
-  const { postData, data, isPending, error } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
+  const { postData, data } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
 
   const handleSubmit = (e) => {
     e.preventDefault()
