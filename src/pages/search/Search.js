@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import RecipeList from '../../components/RecipeList'
 
 import './Search.css'
+import Loader from '../../components/Loader'
 
 export default function Search() {
   const queryString = useLocation().search
@@ -16,7 +17,7 @@ export default function Search() {
     <div>
       {query && <h2 className="page-title">Recipes including "{query}"</h2>}
       {error && <p className="error">{error}</p>}
-      {isPending && <p className="loading">Loading...</p>}
+      {isPending && <p className="loading"><Loader /></p>}
       {data && <RecipeList recipes={data} />}
     </div>
   )

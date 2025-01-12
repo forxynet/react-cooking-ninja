@@ -2,6 +2,7 @@ import React from 'react'
 import './Recipe.css'
 import { useParams } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
+import Loader from '../../components/Loader'
 
 export default function Recipe() {
   const { id } = useParams()
@@ -11,7 +12,7 @@ export default function Recipe() {
   return (
     <div className='recipe'>
       {error && <p className='error'>{error}</p>}
-      {isPending && <p>Loading..</p>}
+      {isPending && <Loader />}
       {recipe && (
         <>
           <h2 className="page-title">{recipe.title}</h2>
