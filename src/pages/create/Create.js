@@ -1,5 +1,7 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate } from "react-router";
 import { useFetch } from '../../hooks/useFetch'
+
 
 // styles
 import './Create.css'
@@ -12,7 +14,7 @@ export default function Create() {
   const [ingredients, setIngredients] = useState([])
   const ingredientInput = useRef(null)
 
-  const { postData, data, error } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
+  const { postData, data, isPending, error } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -30,6 +32,14 @@ export default function Create() {
     ingredientInput.current.focus()
   }
 
+  // redirect the user when we get data response
+  let navigate = useNavigate();
+  useEffect(() => {
+    console.log(data)
+    if (data) {
+      navigate("/");
+    }
+  }, [data, navigate]);
 
   return (
     <div className="create">
@@ -79,7 +89,7 @@ export default function Create() {
           />
         </label>
 
-        <button className="btn">submit</button>
+        <button className="btn" isPending disabled >submit</button>
       </form>
     </div>
   )
