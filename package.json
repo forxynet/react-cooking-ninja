@@ -8,7 +8,6 @@
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^7.1.1",
     "react-scripts": "^3.0.1",
-    "uuid": "^11.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
