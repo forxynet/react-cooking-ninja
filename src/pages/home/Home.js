@@ -7,7 +7,7 @@ import './Home.css'
 import RecipeList from '../../components/RecipeList'
 
 export default function Home() {
-  const { data, isPending, error } = useFetch('http://localhost:3000/recipes')
+  const { data, isPending, error } = useFetch('https://node-server-json-db.onrender.com/recipes')
 
   return (
     <div className='home'>
