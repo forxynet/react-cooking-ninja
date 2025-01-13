@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from "react-router";
-import { useFetch } from '../../hooks/useFetch'
-
+import { projectFirestore } from '../../firebase/config';
 
 // styles
 import './Create.css'
@@ -10,17 +9,24 @@ import { useTheme } from '../../hooks/useTheme';
 export default function Create() {
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
+  const [error, setError] = useState(false)
   const [cookingTime, setCookingTime] = useState('')
   const [newIngredient, setNewIngredient] = useState('')
   const [ingredients, setIngredients] = useState([])
   const ingredientInput = useRef(null)
   const { mode } = useTheme()
 
-  const { postData, data } = useFetch('https://node-server-json-db.onrender.com/recipes', 'POST')
+  let navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
+    const doc = { title, ingredients, method, cookingTime: cookingTime + ' minutes' }
+    try {
+      await projectFirestore.collection('recipes').add(doc)
+      navigate("/");
+    } catch (err) {
+      setError(err)
+    }
   }
 
   const handleAdd = (e) => {
@@ -34,20 +40,11 @@ export default function Create() {
     ingredientInput.current.focus()
   }
 
-  // redirect the user when we get data response
-  let navigate = useNavigate();
-  useEffect(() => {
-    console.log(data)
-    if (data) {
-      navigate("/");
-    }
-  }, [data, navigate]);
-
   return (
     <div className={`create ${mode}`}>
       <h2 className="page-title">Add a New Recipe</h2>
       <form onSubmit={handleSubmit}>
-
+        {error && <p>{error}</p>}
         <label>
           <span>Recipe title:</span>
           <input
@@ -91,7 +88,7 @@ export default function Create() {
           />
         </label>
 
-        <button className="btn" isPending disabled >submit</button>
+        <button className="btn">submit</button>
       </form>
     </div>
   )
