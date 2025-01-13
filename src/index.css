@@ -28,7 +28,7 @@ input, textarea {
 .page-title {
   text-align: center;
   margin: 40px auto;
-  color: #428b64;
+  color: #fff;
 }
 .loading, .error {
   text-align: center;
