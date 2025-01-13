@@ -1,5 +1,6 @@
 import { useTheme } from "../hooks/useTheme"
 
+import contrast from '../asserts/contrast.svg'
 
 // styles
 import './ThemeSelector.css'
@@ -19,7 +20,7 @@ export default function ThemeSelector() {
       <div className="mode-toggle">
         <img
           onClick={toggleMode}
-          src='dark_mode.png'
+          src={contrast}
           style={{ filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)' }}
           alt="dark/light toggle icon"
         />
