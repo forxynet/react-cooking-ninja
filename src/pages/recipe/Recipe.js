@@ -29,6 +29,7 @@ export default function Recipe() {
     }))
 
     return () => unsub()
+
   }, [id])
 
   function handleUpdate() {
